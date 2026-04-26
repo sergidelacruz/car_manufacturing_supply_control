@@ -1,0 +1,144 @@
+// =====================================================
+// Car Manufacturing Supply Control
+// Full schema — SOURCE (OLTP) + GOLD (Star Schema)
+// Paste this at dbdiagram.io
+// Tip: place FACT_SALES in the center, dimensions around it
+// =====================================================
+
+// ---- SOURCE / OLTP TABLES -------------------------
+
+Table SUPPLIER {
+  supplier_id  integer  [pk]
+  name         nvarchar
+  address      nvarchar
+  city         nvarchar
+  province     nvarchar
+}
+
+Table FINAL_DELIVERY {
+  delivery_id  integer  [pk]
+  supplier_id  integer  [ref: > SUPPLIER.supplier_id]
+  date         date
+}
+
+Table LOT_DELIVERY {
+  delivery_id  integer  [ref: > FINAL_DELIVERY.delivery_id]
+  part_id      integer  [ref: > PARTS.part_id]
+  date         date
+  quantity     integer
+
+  indexes {
+    (delivery_id, part_id) [pk]
+  }
+}
+
+Table CATEGORY {
+  category_id  integer  [pk]
+  name         text
+}
+
+Table PARTS {
+  part_id      integer  [pk]
+  name         text
+  color        text
+  price        decimal
+  category_id  integer  [ref: > CATEGORY.category_id]
+}
+
+Table CARS {
+  car_id       integer  [pk]
+  brand        text
+  model        text
+  year         integer
+}
+
+Table PARTS_CAR {
+  car_id       integer  [ref: > CARS.car_id]
+  part_id      integer  [ref: > PARTS.part_id]
+  quantity     integer
+
+  indexes {
+    (car_id, part_id) [pk]
+  }
+}
+
+Table CUSTOMERS {
+  customer_id  integer  [pk]
+  name         nvarchar
+  address      nvarchar
+  city         nvarchar
+  province     nvarchar
+}
+
+Table SALES {
+  sale_id      integer  [pk]
+  customer_id  integer  [ref: > CUSTOMERS.customer_id]
+  car_id       integer  [ref: > CARS.car_id]
+  date         date
+  price        numeric
+}
+
+// ---- GOLD / STAR SCHEMA ---------------------------
+
+Table DIM_TIME {
+  time_id       integer  [pk, note: 'YYYYMMDD format — e.g. 20230115']
+  full_date     date
+  year          integer
+  quarter       integer
+  quarter_name  varchar
+  month         integer
+  month_name    varchar
+  is_weekend    boolean
+}
+
+Table DIM_CUSTOMER {
+  customer_key  integer  [pk]
+  customer_id   integer  [note: 'source natural key']
+  name          nvarchar
+  city          nvarchar
+  province      nvarchar
+  region        varchar
+}
+
+Table DIM_CAR {
+  car_key          integer  [pk]
+  car_id           integer  [note: 'source natural key']
+  brand            text
+  model            text
+  manufacture_year integer
+  segment          varchar
+  unique_parts     integer
+  total_parts_qty  integer
+}
+
+Table DIM_SUPPLIER {
+  supplier_key  integer  [pk]
+  supplier_id   integer  [note: 'source natural key']
+  name          nvarchar
+  city          nvarchar
+  province      nvarchar
+}
+
+Table DIM_PART {
+  part_key       integer  [pk]
+  part_id        integer  [note: 'source natural key']
+  name           text
+  color          text
+  unit_price     decimal
+  category_name  text
+}
+
+Table FACT_SALES {
+  sale_key            integer  [pk]
+  car_key             integer  [ref: > DIM_CAR.car_key]
+  customer_key        integer  [ref: > DIM_CUSTOMER.customer_key]
+  supplier_key        integer  [ref: > DIM_SUPPLIER.supplier_key]
+  time_id             integer  [ref: > DIM_TIME.time_id]
+  sale_id             integer  [note: 'degenerate dimension']
+  sale_price          numeric
+  total_parts_cost    decimal
+  gross_margin        decimal
+  gross_margin_pct    decimal
+  unique_parts_count  integer
+  total_parts_qty     integer
+}
