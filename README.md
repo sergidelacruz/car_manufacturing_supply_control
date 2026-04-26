@@ -1,6 +1,5 @@
 # Car Manufacturing Supply Control — Data Engineering Project
 
-<!-- ✏️ CHANGE: Replace the badge URLs below with your actual GitHub username and repo name -->
 ![SQL](https://img.shields.io/badge/SQL-Snowflake-29B5E8?logo=snowflake&logoColor=white)
 ![Architecture](https://img.shields.io/badge/Architecture-Medallion-brightgreen)
 ![Modelling](https://img.shields.io/badge/Modelling-Star%20Schema-orange)
@@ -9,9 +8,6 @@
 An end-to-end Data Engineering portfolio project built on Snowflake. Transforms a transactional (OLTP) car manufacturing database into a fully modelled analytical data warehouse using the **Medallion Architecture** (Bronze → Silver → Gold) and **Kimball's Star Schema** principles.
 
 ![Star Schema Diagram](docs/schema.png)
-
-<!-- ✏️ CHANGE: Export your dbdiagram.io schema as a PNG, save it as docs/schema.png in the repo, and uncomment the line below -->
-<!-- ![Star Schema Diagram](docs/schema.png) -->
 
 ---
 
@@ -173,9 +169,9 @@ ORDER BY revenue DESC;
 
 ## Author
 
-<!-- ✏️ CHANGE: Replace with your real name, LinkedIn URL, and email -->
+**Sergi de la Cruz Núñez**
 **Your Name**
-[LinkedIn](https://linkedin.com/in/your-profile) · [your@email.com](mailto:your@email.com)
+[LinkedIn]((https://www.linkedin.com/in/sergi-de-la-cruz-905543257/)) · [your@email.com](mailto:sergidelacruz1994@gmail.com)
 
 ---
 
