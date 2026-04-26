@@ -170,7 +170,7 @@ ORDER BY revenue DESC;
 ## Author
 
 **Sergi de la Cruz Núñez**  
-[LinkedIn]((https://www.linkedin.com/in/sergi-de-la-cruz-905543257/)) · [your@email.com](mailto:sergidelacruz1994@gmail.com)
+[LinkedIn](https://www.linkedin.com/in/sergi-de-la-cruz-905543257/) · [sergidelacruz1994@gmail.com](mailto:sergidelacruz1994@gmail.com)
 
 ---
 
