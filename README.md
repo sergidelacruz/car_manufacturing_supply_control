@@ -8,6 +8,8 @@
 
 An end-to-end Data Engineering portfolio project built on Snowflake. Transforms a transactional (OLTP) car manufacturing database into a fully modelled analytical data warehouse using the **Medallion Architecture** (Bronze → Silver → Gold) and **Kimball's Star Schema** principles.
 
+![Star Schema Diagram](docs/schema.png)
+
 <!-- ✏️ CHANGE: Export your dbdiagram.io schema as a PNG, save it as docs/schema.png in the repo, and uncomment the line below -->
 <!-- ![Star Schema Diagram](docs/schema.png) -->
 
