@@ -10,7 +10,7 @@ An end-to-end **analytics engineering** project built on Snowflake. Transforms a
 
 **Business context:** A car manufacturer needs to consolidate data from sales, suppliers, parts, and deliveries into a single analytical layer. The goal is a reliable, self-service reporting layer that answers questions like: *Which models have the highest margin? Which suppliers are underperforming? How is revenue trending month-over-month?*
 
-![Architecture Diagram](docs/architecture.svg)
+![Architecture Diagram](docs/architecture.png)
 
 ---
 
