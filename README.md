@@ -1,4 +1,4 @@
-# Automotive Analytics Platform — Analytics Engineering with Snowflake
+# Automotive Supply Chain — Data Engineering Pipeline on Snowflake
 
 ![SQL](https://img.shields.io/badge/SQL-Snowflake-29B5E8?logo=snowflake&logoColor=white)
 ![Architecture](https://img.shields.io/badge/Architecture-Medallion-brightgreen)
@@ -6,7 +6,7 @@
 ![dbt](https://img.shields.io/badge/dbt--compatible-architecture-FF694B?logo=dbt&logoColor=white)
 ![Status](https://img.shields.io/badge/Status-Complete-success)
 
-An end-to-end **analytics engineering** project built on Snowflake. Transforms a transactional OLTP database from a car manufacturing company into a fully modelled analytical data warehouse — enabling business teams to answer questions about revenue, supplier performance, and model profitability without touching raw data.
+End-to-end data engineering pipeline built on Snowflake. Ingests raw transactional data from a car manufacturer's OLTP system via Python, transforms it through a Medallion architecture (Bronze → Silver → Gold), and delivers a BI-ready star schema with a semantic reporting layer.
 
 **Business context:** A car manufacturer needs to consolidate data from sales, suppliers, parts, and deliveries into a single analytical layer. The goal is a reliable, self-service reporting layer that answers questions like: *Which models have the highest margin? Which suppliers are underperforming? How is revenue trending month-over-month?*
 
@@ -14,15 +14,16 @@ An end-to-end **analytics engineering** project built on Snowflake. Transforms a
 
 ---
 
-## Analytics engineering patterns demonstrated
+## Data Engineering patterns demonstrated
 
 | Pattern | Implementation | Why it matters |
-|---------|---------------|----------------|
-| Dimensional modelling (Kimball) | Star schema: 5 dims + 1 fact | Query performance, BI-tool compatibility |
+|---|---|---|
 | Medallion architecture | Bronze → Silver → Gold → Reporting | Clear data lineage, layer isolation |
-| Idempotent ETL | `MERGE INTO ... USING ... ON ...` throughout | Safe re-runs, no duplicates in production |
-| Surrogate keys | `AUTOINCREMENT` on all dimension tables | Decouples warehouse from source system changes |
+| Python-based ingestion | `02_bronze/python_ingestion/` | Simulates real EL from operational source systems |
+| Idempotent ETL loads | `MERGE INTO ... USING ... ON ...` throughout | Safe re-runs, no duplicates — production-grade requirement |
 | Data quality layer | 6 automated assertion checks in Silver | Catches issues before they reach Gold |
+| Dimensional modelling (Kimball) | Star schema: 5 dims + 1 fact | Query performance, BI-tool compatibility |
+| Surrogate keys | `AUTOINCREMENT` on all dimension tables | Decouples warehouse from source system changes |
 | Semantic / reporting layer | 6 analytical views on top of Gold | Decouples BI tools from warehouse internals |
 | Generated date dimension | `GENERATOR` function — pre-populated 2022–2025 | Every date exists, even days with no sales |
 
